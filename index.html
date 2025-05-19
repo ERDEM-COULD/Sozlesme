@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sözleşme Kabul Formu</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      padding: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    form {
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+      width: 350px;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    input:focus {
+      border-color: #c8102e;
+      outline: none;
+    }
+
+    button {
+      background-color: #c8102e;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #a50e22;
+    }
+
+    .sozlesme-btn {
+      margin-top: 15px;
+      font-size: 0.75rem;
+      background: none;
+      border: none;
+      color: #007bff;
+      cursor: pointer;
+      text-decoration: underline;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <form id="sozlesmeForm">
+    <input type="text" id="isim" name="isim" placeholder="İsim" required />
+    <input type="text" id="soyisim" name="soyisim" placeholder="Soyisim" required />
+    <input type="text" id="sirket" name="sirket" placeholder="Şirket İsmi" required />
+    <input type="text" id="yardimci" name="yardimci" placeholder="Yardımcı İsmi" required />
+    <input type="text" id="yer" name="yer" placeholder="Yaşadığınız Yer" required />
+    <input type="email" id="email" name="email" placeholder="E-posta" required />
+    <input type="text" id="postakodu" name="postakodu" placeholder="Posta Kodu" required />
+    
+    <button type="submit">Sözleşmeyi kabul et</button>
+    <button type="button" class="sozlesme-btn" onclick="window.location.href='sozlesme-detaylar.html'">Sözleşme Detaylarını Görün</button>
+  </form>
+
+  <script>
+    document.getElementById('sozlesmeForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const isim = document.getElementById('isim').value;
+      const soyisim = document.getElementById('soyisim').value;
+      const sirket = document.getElementById('sirket').value;
+      const yardimci = document.getElementById('yardimci').value;
+      const yer = document.getElementById('yer').value;
+      const email = document.getElementById('email').value;
+      const postakodu = document.getElementById('postakodu').value;
+
+      const mailtoAdres = 'merdem58171.3@gmail.com';  // Gönderilecek mail adresi
+
+      const konu = encodeURIComponent('Sözleşme Kabul Formu');
+      const icerik = encodeURIComponent(
+        `İsim: ${isim}\n` +
+        `Soyisim: ${soyisim}\n` +
+        `Şirket İsmi: ${sirket}\n` +
+        `Yardımcı İsmi: ${yardimci}\n` +
+        `Yaşadığınız Yer: ${yer}\n` +
+        `E-posta: ${email}\n` +
+        `Posta Kodu: ${postakodu}\n`
+      );
+
+      // mailto linkini oluşturuyoruz
+      const mailtoLink = `mailto:${mailtoAdres}?subject=${konu}&body=${icerik}`;
+
+      window.location.href = mailtoLink;
+    });
+  </script>
+</body>
+</html>
